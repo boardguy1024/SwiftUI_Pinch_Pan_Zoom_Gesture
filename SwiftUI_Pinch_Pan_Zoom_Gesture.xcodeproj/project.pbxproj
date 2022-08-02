@@ -15,8 +15,8 @@
 		40884921289968380080495E /* SwiftUI_Pinch_Pan_Zoom_GestureApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408848F8289968380080495E /* SwiftUI_Pinch_Pan_Zoom_GestureApp.swift */; };
 		40884922289968380080495E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408848F9289968380080495E /* ContentView.swift */; };
 		40884923289968380080495E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408848F9289968380080495E /* ContentView.swift */; };
-		40884924289968380080495E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 408848FA289968380080495E /* Assets.xcassets */; };
-		40884925289968380080495E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 408848FA289968380080495E /* Assets.xcassets */; };
+		408849352899690F0080495E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 408849342899690F0080495E /* Assets.xcassets */; };
+		408849362899690F0080495E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 408849342899690F0080495E /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,7 +39,6 @@
 /* Begin PBXFileReference section */
 		408848F8289968380080495E /* SwiftUI_Pinch_Pan_Zoom_GestureApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUI_Pinch_Pan_Zoom_GestureApp.swift; sourceTree = "<group>"; };
 		408848F9289968380080495E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		408848FA289968380080495E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		408848FF289968380080495E /* SwiftUI_Pinch_Pan_Zoom_Gesture.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftUI_Pinch_Pan_Zoom_Gesture.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		40884905289968380080495E /* SwiftUI_Pinch_Pan_Zoom_Gesture.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftUI_Pinch_Pan_Zoom_Gesture.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		40884907289968380080495E /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
@@ -49,6 +48,7 @@
 		40884918289968380080495E /* Tests macOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tests macOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4088491C289968380080495E /* Tests_macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_macOS.swift; sourceTree = "<group>"; };
 		4088491E289968380080495E /* Tests_macOSLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_macOSLaunchTests.swift; sourceTree = "<group>"; };
+		408849342899690F0080495E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,7 +99,7 @@
 			children = (
 				408848F8289968380080495E /* SwiftUI_Pinch_Pan_Zoom_GestureApp.swift */,
 				408848F9289968380080495E /* ContentView.swift */,
-				408848FA289968380080495E /* Assets.xcassets */,
+				408849342899690F0080495E /* Assets.xcassets */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -266,7 +266,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				40884924289968380080495E /* Assets.xcassets in Resources */,
+				408849352899690F0080495E /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -274,7 +274,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				40884925289968380080495E /* Assets.xcassets in Resources */,
+				408849362899690F0080495E /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
