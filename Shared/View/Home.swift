@@ -53,9 +53,11 @@ struct PinchZoomContext<Content: View>: View {
     }
     
     
-    @State var offset: CGFloat = .zero
+    @State var offset: CGPoint = .zero
     @State var scale: CGFloat = 0
     
+    // Gestureが始まったposition
+    @State var scalePosition: CGPoint = .zero
     
     var body: some View {
         // ここでは UIKit Gestureを使う
@@ -65,11 +67,11 @@ struct PinchZoomContext<Content: View>: View {
                 GeometryReader { proxy in
                     let size = proxy.size
                     
-                    ZoomGesture(size: size, scale: $scale, offset: $offset)
+                    ZoomGesture(size: size, scale: $scale, offset: $offset, scalePosition: $scalePosition)
 
                 }
             )
-            .scaleEffect(1 + scale)
+            .scaleEffect(1 + scale, anchor: .init(x: scalePosition.x, y: scalePosition.y))
         
         
         
@@ -82,7 +84,10 @@ struct ZoomGesture: UIViewRepresentable {
     var size: CGSize
     
     @Binding var scale: CGFloat
-    @Binding var offset: CGFloat
+    @Binding var offset: CGPoint
+    
+    // Gestureが始まったposition
+    @Binding var scalePosition: CGPoint
     
     func makeUIView(context: Context) -> UIView {
         
@@ -125,10 +130,24 @@ struct ZoomGesture: UIViewRepresentable {
                 
                 // scaleは 1をベースとしているので
                 parent.scale = (sender.scale - 1)
+                
+                // gestureが始まった座標をとり、scalePointに計算
+                // 370 / 370 = 1 ,
+                // 50(左に近い) / 370 = 0.135...
+                
+                let scalePointX = sender.location(in: sender.view).x / sender.view!.frame.width
+                let scalePointY = sender.location(in: sender.view).y / sender.view!.frame.height
+
+                // scalePointX ( 0...1 ) scalePointY ( 0...1 )
+                let point: CGPoint = .init(x: scalePointX, y: scalePointY)
+                
+                // pinchが始まった初回だけそのpointを親に渡す ( zoomをしながら指を動かしても 初回の座標でのみzoomができるようにしたいため
+                parent.scalePosition = parent.scalePosition == .zero ? point : parent.scalePosition
             } else {
                 // それ以外の場合には　元に戻す
                 withAnimation(.easeInOut(duration: 0.35)) {
                     parent.scale = 0
+                    parent.scalePosition = .zero
                 }
             }
         }
