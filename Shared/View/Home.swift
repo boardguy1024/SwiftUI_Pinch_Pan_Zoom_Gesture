@@ -63,6 +63,7 @@ struct PinchZoomContext<Content: View>: View {
         // ここでは UIKit Gestureを使う
 
         content
+            .offset(x: offset.x, y: offset.y)
             .overlay(
                 GeometryReader { proxy in
                     let size = proxy.size
@@ -99,6 +100,13 @@ struct ZoomGesture: UIViewRepresentable {
                                                     action: #selector(context.coordinator.handlePinch(sender:)))
         
         view.addGestureRecognizer(pinchGesture)
+        // PanGestureを追加
+        let panGesture = UIPanGestureRecognizer(target: context.coordinator,
+                                                action: #selector(context.coordinator.handlePan(sender:)))
+        
+        panGesture.delegate = context.coordinator
+        
+        view.addGestureRecognizer(panGesture)
         return view
     }
     
@@ -111,13 +119,17 @@ struct ZoomGesture: UIViewRepresentable {
     
     
     // GestureのHandler
-    class Coordinator: NSObject {
+    class Coordinator: NSObject, UIGestureRecognizerDelegate {
         
         
         var parent: ZoomGesture
         
         init(parent: ZoomGesture) {
             self.parent = parent
+        }
+        
+        func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+            return true
         }
         
         @objc
@@ -148,6 +160,27 @@ struct ZoomGesture: UIViewRepresentable {
                 withAnimation(.easeInOut(duration: 0.35)) {
                     parent.scale = 0
                     parent.scalePosition = .zero
+                }
+            }
+        }
+        
+        @objc
+        func handlePan(sender: UIPanGestureRecognizer) {
+            
+            sender.maximumNumberOfTouches = 2
+            
+            if (sender.state == .began || sender.state == .changed) && parent.scale > 0 {
+                
+                // 親Viewの領域内で 2指でdragしたpointを返している
+                let translation = sender.translation(in: sender.view)
+                
+                // そのoffsetされたpointを親の offsetに返す
+                parent.offset = translation
+                
+            } else {
+                // それ以外の場合には　元に戻す
+                withAnimation(.easeInOut(duration: 0.35)) {
+                    parent.offset = .zero
                 }
             }
         }
